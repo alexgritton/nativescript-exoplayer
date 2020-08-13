@@ -1,32 +1,10 @@
-﻿import types = require("utils/types");
+﻿
 import definition = require("./video-source");
 import common = require("./video-source-common");
-import * as utilsModule from "utils/utils";
-import * as fileSystemModule from "file-system";
-import * as enumsModule from "ui/enums";
+import { Utils, path, knownFolders } from "@nativescript/core";
 
 global.moduleMerge(common, exports);
 
-var utils: typeof utilsModule;
-function ensureUtils() {
-    if (!utils) {
-        utils = require("utils/utils");
-    }
-}
-
-var fs: typeof fileSystemModule;
-function ensureFS() {
-    if (!fs) {
-        fs = require("file-system");
-    }
-}
-
-var enums: typeof enumsModule;
-function ensureEnums() {
-    if (!enums) {
-        enums = require("ui/enums");
-    }
-}
 
 declare var android, AVPlayer: any;
 
@@ -37,9 +15,8 @@ export class VideoSource implements definition.VideoSource {
     public loadFromResource(name: string): boolean {
         this.android = null;
 
-        ensureUtils();
 
-        var res = utils.ad.getApplicationContext().getResources();
+        var res = Utils.ad.getApplicationContext().getResources();
         if (res) {
             var UrlPath = "android.resource://org.nativescript.videoPlayer/R.raw." + name;
             this.android = UrlPath;
@@ -55,13 +32,12 @@ export class VideoSource implements definition.VideoSource {
         return this.android != null;
     }
 
-    public loadFromFile(path: string): boolean {
+    public loadFromFile(filePath: string): boolean {
 
-        ensureFS();
 
-        var fileName = types.isString(path) ? path.trim() : "";
+        var fileName = Utils.isString(filePath) ? filePath.trim() : "";
         if (fileName.indexOf("~/") === 0) {
-            fileName = fs.path.join(fs.knownFolders.currentApp().path, fileName.replace("~/", ""));
+            fileName = path.join(knownFolders.currentApp().path, fileName.replace("~/", ""));
         }
 
         this.android = fileName;

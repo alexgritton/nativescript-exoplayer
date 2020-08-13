@@ -1,4 +1,4 @@
-import utils = require("utils/utils");
+import {Utils} from '@nativescript/core'
 
 // This is used for definition purposes only, it does not generate JavaScript for it.
 import definition = require("./video-source");
@@ -28,12 +28,12 @@ export function fromFileOrResource(path: string): definition.VideoSource {
         throw new Error("Path \"" + "\" is not a valid file or resource.");
     }
 
-    if (path.indexOf(utils.RESOURCE_PREFIX) === 0) {
-        return fromResource(path.substr(utils.RESOURCE_PREFIX.length));
+    if (path.indexOf(Utils.RESOURCE_PREFIX) === 0) {
+        return fromResource(path.substr(Utils.RESOURCE_PREFIX.length));
     }
     return fromFile(path);
 }
 
 export function isFileOrResourcePath(path: string): boolean {
-    return utils.isFileOrResourcePath(path);
+    return Utils.isFileOrResourcePath(path);
 }

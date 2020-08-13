@@ -1,7 +1,4 @@
-import { Observable } from "tns-core-modules/data/observable";
-import { Page } from "tns-core-modules/ui/page";
-import { isAndroid } from "tns-core-modules/platform";
-import { setInterval } from "tns-core-modules/timer";
+import { Observable, Page, isAndroid } from "@nativescript/core";
 import { VideoFill } from "nativescript-exoplayer";
 
 export class HelloWorldModel extends Observable {
@@ -45,7 +42,7 @@ export class HelloWorldModel extends Observable {
   }
 
   public playbackStart(args) {
-  	this.completed = false;
+    this.completed = false;
   }
 
   /**
@@ -187,7 +184,7 @@ export class HelloWorldModel extends Observable {
       this.set("currentTime", x);
       this.set("videoDuration", y);
     }, 200);
-    return trackInterval;
+    return <any>trackInterval;
 
   }
 

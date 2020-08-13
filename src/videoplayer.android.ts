@@ -1,8 +1,7 @@
 ﻿
 
 import { Video as VideoBase, VideoFill, videoSourceProperty, subtitleSourceProperty } from "./videoplayer-common";
-import * as nsUtils from "tns-core-modules/utils/utils";
-import * as nsApp from "tns-core-modules/application";
+import { Utils, Application } from '@nativescript/core'
 
 export * from "./videoplayer-common";
 
@@ -188,8 +187,8 @@ export class Video extends VideoBase {
 			}
 		));
 
-		nsApp.on(nsApp.suspendEvent, this._boundStop);
-		nsApp.on(nsApp.resumeEvent, this._boundStart);
+		Application.on(Application.suspendEvent, this._boundStop);
+		Application.on(Application.resumeEvent, this._boundStart);
 
 	}
 
@@ -198,8 +197,8 @@ export class Video extends VideoBase {
 	}
 
 	public disableEventTracking() {
-		nsApp.off(nsApp.suspendEvent, this._boundStop);
-		nsApp.off(nsApp.resumeEvent, this._boundStart);
+		Application.off(Application.suspendEvent, this._boundStop);
+		Application.off(Application.resumeEvent, this._boundStart);
 	}
 
 	public toggleMediaControllerVisibility(): void {
@@ -388,7 +387,7 @@ export class Video extends VideoBase {
 
 		this.videoOpened = true; // we don't want to come back in here from texture system...
 		if (!this.backgroundAudio) {
-			let am = nsUtils.ad.getApplicationContext().getSystemService(android.content.Context.AUDIO_SERVICE);
+			let am = Utils.ad.getApplicationContext().getSystemService(android.content.Context.AUDIO_SERVICE);
 			am.requestAudioFocus(null, android.media.AudioManager.STREAM_MUSIC, android.media.AudioManager.AUDIOFOCUS_GAIN);
 		}
 
@@ -654,7 +653,7 @@ export class Video extends VideoBase {
 			if (this.mediaController && this.mediaController.isVisible()) {
 				this.mediaController.hide();
 			}
-			let am = nsUtils.ad.getApplicationContext().getSystemService(android.content.Context.AUDIO_SERVICE);
+			let am = Utils.ad.getApplicationContext().getSystemService(android.content.Context.AUDIO_SERVICE);
 			am.abandonAudioFocus(null);
 		}
 	}

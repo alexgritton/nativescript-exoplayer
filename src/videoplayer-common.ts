@@ -1,9 +1,6 @@
 ﻿import * as videoSource from "./video-source/video-source";
 import * as subtitleSource from "./subtitle-source/subtitle-source";
-import { isFileOrResourcePath } from "tns-core-modules/utils/utils";
-import { isString } from "tns-core-modules/utils/types"
-import { View, Property, booleanConverter } from "tns-core-modules/ui/core/view";
-import * as imageSource from "tns-core-modules/image-source";
+import { Utils, View, Property, booleanConverter, ImageSource } from "@nativescript/core";
 
 // on Android we explicitly set propertySettings to None because android will invalidate its layout (skip unnecessary native call).
 // var AffectsLayout = platform.device.os === platform.platformNames.android ? dependencyObservable.PropertyMetadataSettings.None : dependencyObservable.PropertyMetadataSettings.AffectsLayout;
@@ -13,12 +10,12 @@ function onSrcPropertyChanged(view, oldValue, newValue) {
     const video = view;
     let value = newValue;
 
-    if (isString(value)) {
+    if (Utils.isString(value)) {
         value = value.trim();
         video.videoSource = null;
         video["_url"] = value;
         video.isLoadingProperty = true;
-        if (isFileOrResourcePath(value)) {
+        if (Utils.isFileOrResourcePath(value)) {
             video.videoSource = videoSource.fromFileOrResource(value);
             video.isLoadingProperty = false;
         } else {
@@ -36,10 +33,10 @@ function onSrcPropertyChanged(view, oldValue, newValue) {
 
 function onSubtitlesPropertyChanged(view, oldValue, newValue) {
     const video = view;
-    if (isString(newValue)) {
+    if (Utils.isString(newValue)) {
         let value = newValue.trim();
         video.subtitleSource = null;
-        if (isFileOrResourcePath(value)) {
+        if (Utils.isFileOrResourcePath(value)) {
             video.subtitleSource = subtitleSource.fromFileOrResource(value);
         } else {
             video.subtitleSource = subtitleSource.fromUrl(value);
@@ -51,23 +48,23 @@ function onImgSrcPropertyChanged(view, oldValue, newValue) {
     const video = view;
     let value = newValue;
 
-    if (isString(value)) {
+    if (Utils.isString(value)) {
         value = value.trim();
         video["_url"] = value;
         video.isLoadingProperty = true;
-        if (isFileOrResourcePath(value)) {
-            video.imageSource = imageSource.fromFileOrResource(value);
+        if (Utils.isFileOrResourcePath(value)) {
+            video.imageSource = ImageSource.fromFileOrResourceSync(value);
             video.isLoadingProperty = false;
         } else {
             if (video["_url"] === value) {
-                video.imageSource = imageSource.fromUrl(value);
+                video.imageSource = ImageSource.fromUrl(value);
                 video.isLoadingProperty = false;
             }
         }
-    } else if (value instanceof imageSource.ImageSource) {
+    } else if (value instanceof ImageSource) {
         video.imageSource = value;
     } else {
-        video.imageSource = imageSource.fromNativeSource(value);
+        video.imageSource = new ImageSource(value);
     }
 }
 

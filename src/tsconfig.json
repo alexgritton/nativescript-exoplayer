@@ -12,9 +12,9 @@
         "experimentalDecorators": true,
         "noEmitOnError": false,
         "lib": [
-          "es2017",
-          "dom",
-          "es6"
+            "es2017",
+            "dom",
+            "es6"
         ],
         "baseUrl": ".",
         "paths": {
@@ -23,12 +23,11 @@
                 "../demo/node_modules/*"
             ]
         },
-      "skipLibCheck": true
+        "skipLibCheck": true
     },
     "files": [
         // reference
-        "../demo/node_modules/tns-platform-declarations/android.d.ts",
-        "../demo/node_modules/tns-platform-declarations/ios.d.ts",
+        "references.d.ts",
         // sources
         "videoplayer.d.ts",
         "videoplayer-common.ts",

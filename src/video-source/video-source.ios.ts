@@ -1,7 +1,6 @@
-import types = require("utils/types");
-import fs = require("file-system");
+
 import common = require("./video-source-common");
-import enums = require("ui/enums");
+import { Utils, path, knownFolders } from '@nativescript/core';
 import definition = require("./video-source");
 
 declare var android, AVPlayerItem, NSBundle, NSURL;
@@ -21,11 +20,11 @@ export class VideoSource implements definition.VideoSource {
         return this.ios != null;
     }
 
-    public loadFromFile(path: string): boolean {
-        var fileName = types.isString(path) ? path.trim() : "";
+    public loadFromFile(filePath: string): boolean {
+        var fileName = Utils.isString(filePath) ? filePath.trim() : "";
 
         if (fileName.indexOf("~/") === 0) {
-            fileName = fs.path.join(fs.knownFolders.currentApp().path, fileName.replace("~/", ""));
+            fileName = path.join(knownFolders.currentApp().path, fileName.replace("~/", ""));
         }
 
         let videoURL = NSURL.fileURLWithPath(fileName);

@@ -1,0 +1,8 @@
+{
+  "appResourcesPath": "app/App_Resources",
+  "appPath": "demo",
+  "nsext": ".tns",
+  "webext": "",
+  "shared": true,
+  "useLegacyWorkflow": false
+}
