@@ -1,7 +1,7 @@
-import types = require("utils/types");
-import fs = require("file-system");
-import common = require("./subtitle-source-common");
-import definition = require("./subtitle-source");
+import * as types from "utils/types";
+import * as fs from "file-system";
+import * as common from "./subtitle-source-common";
+import * as definition from "./subtitle-source";
 
 declare var NSString, NSBundle, NSURL;
 

@@ -1,6 +1,6 @@
 ﻿
-import definition = require("./video-source");
-import common = require("./video-source-common");
+import * as definition from "./video-source";
+import * as common from "./video-source-common";
 import { Utils, path, knownFolders } from "@nativescript/core";
 
 global.moduleMerge(common, exports);

@@ -2,7 +2,7 @@
 import { Utils } from "@nativescript/core";
 
 // This is used for definition purposes only, it does not generate JavaScript for it.
-import definition = require("./subtitle-source");
+import * as definition from "./subtitle-source";
 
 export function fromResource(name: string): definition.SubtitleSource {
     var video = new definition.SubtitleSource();

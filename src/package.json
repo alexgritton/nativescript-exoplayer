@@ -34,7 +34,8 @@
     "exoplayer",
     "subtitles"
   ],
-  "contributors": [{
+  "contributors": [
+    {
       "name": "Nathanael Anderson",
       "email": "nathan@master-technology",
       "url": "https://github.com/nathanaela"

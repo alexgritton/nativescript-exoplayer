@@ -1,7 +1,7 @@
 
-import common = require("./video-source-common");
+import * as common from "./video-source-common";
 import { Utils, path, knownFolders } from '@nativescript/core';
-import definition = require("./video-source");
+import * as definition from "./video-source";
 
 declare var android, AVPlayerItem, NSBundle, NSURL;
 

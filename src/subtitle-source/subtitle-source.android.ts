@@ -1,6 +1,6 @@
 ﻿
-import definition = require("./subtitle-source");
-import common = require("./subtitle-source-common");
+import * as definition from "./subtitle-source";
+import * as common from "./subtitle-source-common";
 import { Utils, path, knownFolders } from "@nativescript/core"
 
 global.moduleMerge(common, exports);

@@ -1,14 +1,14 @@
-import {Utils} from '@nativescript/core'
+import { Utils } from '@nativescript/core'
 
 // This is used for definition purposes only, it does not generate JavaScript for it.
-import definition = require("./video-source");
+import * as definition from "./video-source";
 
 export function fromResource(name: string): definition.VideoSource {
     var video = new definition.VideoSource();
     return video.loadFromResource(name) ? video : null;
 }
 
-export function fromFile(path: string): definition.VideoSource { 
+export function fromFile(path: string): definition.VideoSource {
     var video = new definition.VideoSource();
     return video.loadFromFile(path) ? video : null;
 }
@@ -19,7 +19,7 @@ export function fromNativeSource(source: any): definition.VideoSource {
 }
 
 export function fromUrl(url: string): definition.VideoSource {
-    var video = new definition.VideoSource(); 
+    var video = new definition.VideoSource();
     return video.loadFromUrl(url) ? video : null;
 }
 
