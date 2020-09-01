@@ -1,5 +1,5 @@
-﻿import * as videoSource from "./video-source/video-source";
-import * as subtitleSource from "./subtitle-source/subtitle-source";
+﻿import { fromFileOrResource as videoFromFileOrResource, fromUrl as videoFromUrl, fromNativeSource, VideoSource } from "./video-source/video-source";
+import { fromUrl, fromFileOrResource } from "./subtitle-source/subtitle-source";
 import { Utils, View, Property, booleanConverter, ImageSource } from "@nativescript/core";
 
 // on Android we explicitly set propertySettings to None because android will invalidate its layout (skip unnecessary native call).
@@ -16,18 +16,18 @@ function onSrcPropertyChanged(view, oldValue, newValue) {
         video["_url"] = value;
         video.isLoadingProperty = true;
         if (Utils.isFileOrResourcePath(value)) {
-            video.videoSource = videoSource.fromFileOrResource(value);
+            video.videoSource = videoFromFileOrResource(value);
             video.isLoadingProperty = false;
         } else {
             if (video["_url"] === value) {
-                video.videoSource = videoSource.fromUrl(value);
+                video.videoSource = videoFromUrl(value);
                 video.isLoadingProperty = false;
             }
         }
-    } else if (value instanceof videoSource.VideoSource) {
+    } else if (value instanceof VideoSource) {
         video.videoSource = value;
     } else {
-        video.videoSource = videoSource.fromNativeSource(value);
+        video.videoSource = fromNativeSource(value);
     }
 }
 
@@ -37,9 +37,9 @@ function onSubtitlesPropertyChanged(view, oldValue, newValue) {
         let value = newValue.trim();
         video.subtitleSource = null;
         if (Utils.isFileOrResourcePath(value)) {
-            video.subtitleSource = subtitleSource.fromFileOrResource(value);
+            video.subtitleSource = fromFileOrResource(value);
         } else {
-            video.subtitleSource = subtitleSource.fromUrl(value);
+            video.subtitleSource = fromUrl(value);
         }
     }
 }
