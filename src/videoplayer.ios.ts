@@ -42,7 +42,7 @@ export class Video extends VideoBase {
         if (output.match(/Receiver/)) {
             try {
                 audioSession.setCategoryError(AVAudioSessionCategoryPlayAndRecord);
-                audioSession.overrideOutputAudioPortError(1936747378);
+                audioSession.overrideOutputAudioPortError(AVAudioSessionPortOverride.Speaker);//1936747378 //1936747378
                 audioSession.setActiveError(true);
                 console.log('avvideo done')
             } catch (err) {
