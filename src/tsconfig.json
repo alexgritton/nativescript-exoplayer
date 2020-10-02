@@ -24,7 +24,11 @@
                 "../demo/node_modules/*"
             ]
         },
-        "skipLibCheck": true
+        "skipLibCheck": true,
+        "plugins": [{
+            "transform": "../demo/node_modules/@nativescript/webpack/transformers/ns-transform-native-classes",
+            "type": "raw"
+        }]
     },
     "files": [
         // reference

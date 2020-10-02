@@ -1,5 +1,4 @@
-import * as types from "utils/types";
-import * as fs from "file-system";
+import { Utils, path, knownFolders } from "@nativescript/core";
 import * as common from "./subtitle-source-common";
 import * as definition from "./subtitle-source";
 
@@ -18,11 +17,11 @@ export class SubtitleSource implements definition.SubtitleSource {
         return this.ios != null;
     }
 
-    public loadFromFile(path: string): boolean {
-        var fileName = types.isString(path) ? path.trim() : "";
+    public loadFromFile(filePath: string): boolean {
+        var fileName = Utils.isString(filePath) ? filePath.trim() : "";
 
         if (fileName.indexOf("~/") === 0) {
-            fileName = fs.path.join(fs.knownFolders.currentApp().path, fileName.replace("~/", ""));
+            fileName = path.join(knownFolders.currentApp().path, fileName.replace("~/", ""));
         }
 
         let subtitleUrl = NSURL.fileURLWithPath(fileName);

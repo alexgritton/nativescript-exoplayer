@@ -69,9 +69,9 @@ export class Video extends VideoBase {
         }
     }
 
-    get ios(): any {
-        return this.nativeView;
-    }
+    // get ios(): any {
+    //     return this.nativeView;
+    // }
 
     [videoSourceProperty.setNative](value: AVPlayerItem) {
         this._setNativeVideo(value ? (<any>value).ios : null);
@@ -367,7 +367,7 @@ export class Video extends VideoBase {
     }
 
 }
-
+@NativeClass()
 class PlayerObserverClass extends NSObject {
     observeValueForKeyPathOfObjectChangeContext(path: string, obj: Object, change: NSDictionary<any, any>, context: any) {
         if (path === "status") {

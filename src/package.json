@@ -89,7 +89,7 @@
   "scripts": {
     "tsc": "tsc",
     "prepack": "tsc",
-    "setup": "cd ../demo && npm i"
+    "setup": "cd ../demo && npm i && ts-patch install"
   },
   "devDependencies": {
     "typescript": "file:../demo/node_modules/typescript"
